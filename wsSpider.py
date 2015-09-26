@@ -68,20 +68,17 @@ if name.isalpha() and lastname.isalpha() and anio.isnumeric() and termino.isnume
 
 
 	try:
-		try:
-			#una sola materia
-			cal = grades[1].__getitem__(0).__getitem__(0)
-			grade = []
-			grade.append(cal.MATERIA)
-			grade.append(cal.NOTA1)
-			grade.append(cal.NOTA2)
-			grade.append(cal.NOTA3)
-			grade.append(cal.PROMEDIO)
-			grade.append(cal.ESTADO)
-			grade.append(cal.VEZ)
-			grades_table.append(grade)
-		except:
-			print ("No hay calificaciones para el termino " +anio + " " + termino + "\n")
+		#una sola materia
+		cal = grades[1].__getitem__(0).__getitem__(0)
+		grade = []
+		grade.append(cal.MATERIA)
+		grade.append(cal.NOTA1)
+		grade.append(cal.NOTA2)
+		grade.append(cal.NOTA3)
+		grade.append(cal.PROMEDIO)
+		grade.append(cal.ESTADO)
+		grade.append(cal.VEZ)
+		grades_table.append(grade)
 	except:
 		try:
 			#conjunto de materias

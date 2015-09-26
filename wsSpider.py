@@ -58,7 +58,7 @@ if name.isalpha() and lastname.isalpha() and anio.isnumeric() and termino.isnume
 				print ("\nEsta persona no tiene matricula: " + i.NOMBRES + " " + i.APELLIDOS)
 		cont=1
 		print ("\n\n\n")
-		
+
 		for i in students:
 			print (str(cont) + " " + i.name + " " + i.lastname + " " + i.idStudent +"\n" )
 			cont+=1
@@ -67,20 +67,10 @@ if name.isalpha() and lastname.isalpha() and anio.isnumeric() and termino.isnume
 		grades = client.service.wsConsultaCalificaciones(anio, termino, students[int(op)-1].idStudent)
 
 
-	#try:
-		#cal = grades[1].__getitem__(0).__getitem__(0)
-		#grade = []
-		#grade.append(cal.MATERIA)
-		#grade.append(cal.NOTA1)
-		#grade.append(cal.NOTA2)
-		#grade.append(cal.NOTA3)
-		#grade.append(cal.PROMEDIO)
-		#grade.append(cal.ESTADO)
-		#grade.append(cal.VEZ)
-		#grades_table.append(grade)
-	#except:
 	try:
-		for cal in grades.diffgram.NewDataSet.CALIFICACIONES:
+		try:
+			#una sola materia
+			cal = grades[1].__getitem__(0).__getitem__(0)
 			grade = []
 			grade.append(cal.MATERIA)
 			grade.append(cal.NOTA1)
@@ -90,8 +80,23 @@ if name.isalpha() and lastname.isalpha() and anio.isnumeric() and termino.isnume
 			grade.append(cal.ESTADO)
 			grade.append(cal.VEZ)
 			grades_table.append(grade)
+		except:
+			print ("No hay calificaciones para el termino " +anio + " " + termino + "\n")
 	except:
-		print ("No hay calificaciones para el termino " +anio + " " + termino + "\n")
+		try:
+			#conjunto de materias
+			for cal in grades.diffgram.NewDataSet.CALIFICACIONES:
+				grade = []
+				grade.append(cal.MATERIA)
+				grade.append(cal.NOTA1)
+				grade.append(cal.NOTA2)
+				grade.append(cal.NOTA3)
+				grade.append(cal.PROMEDIO)
+				grade.append(cal.ESTADO)
+				grade.append(cal.VEZ)
+				grades_table.append(grade)
+		except:
+			print ("No hay calificaciones para el termino " +anio + " " + termino + "\n")
 
 	print (tabulate(grades_table, headers=["MATERIA ","PARCIAL ","FINAL ","MEJORAMIENTO ","PROMEDIO ","ESTADO ","VEZ "],tablefmt="fancy_grid"))
 else:

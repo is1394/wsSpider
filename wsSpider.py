@@ -63,7 +63,7 @@ if name.isalpha() and lastname.isalpha() and anio.isnumeric() and termino.isnume
 			print (str(cont) + " " + i.name + " " + i.lastname + " " + i.idStudent +"\n" )
 			cont+=1
 
-		op=input("Ingrese el numero a consultar: ")
+		op=input("Ingrese el numero de la persona a consultar: ")
 		grades = client.service.wsConsultaCalificaciones(anio, termino, students[int(op)-1].idStudent)
 
 

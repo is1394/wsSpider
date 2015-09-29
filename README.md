@@ -3,10 +3,10 @@
 ##### Setup:
 
 ###### - Install dependecies:
-	sudo pip2 install tabulate
-	sudo pip2 install suds
-  sudo pip3 install tabulate
-  sudo pip3 install suds-jurko
+	sudo pip2 install tabulate (Python2)
+	sudo pip2 install suds	   (Python2)
+  	sudo pip3 install tabulate (Python3)
+	sudo pip3 install suds-jurko (Python3)
 
 
 ###### - Original Repository:
@@ -21,3 +21,5 @@
 	cd wsSpider
 	chmod +x wsHorario.py
 	./wsHorario.py FIRSTNAME LASTNAME
+	
+###### -Actually wsSpider and wsHorario is in Python 2

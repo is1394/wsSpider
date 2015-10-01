@@ -8,13 +8,13 @@ import sys
 import os
 
 class Student():
-	def __init__(self, name, lastname, idStudent):
-		self.name = name
-		self.lastname = lastname
-		self.idStudent = idStudent
+    def __init__(self, name, lastname, idStudent):
+        self.name = name
+        self.lastname = lastname
+        self.idStudent = idStudent
 
-	def __str__(self):
-		return " " + self.name + " " + self.lastname
+    def __str__(self):
+        return " " + self.name + " " + self.lastname
 
 class Subject():
     def __init__(self,code,name,course): #subject_code, name , course
@@ -89,8 +89,15 @@ if (name.isalpha() and lastname.isalpha()):
 
     #return MATERIASREGISTRADAS
     gradesMat = client.service.wsMateriasRegistradas(COD_ESTUDIANTE)
-    for i in gradesMat.diffgram.NewDataSet.MATERIASREGISTRADAS:
-        subjects.append(Subject(i.COD_MATERIA_ACAD, i.NOMBRE, i.PARALELO))
+    try:
+        for i in gradesMat.diffgram.NewDataSet.MATERIASREGISTRADAS:
+            subjects.append(Subject(i.COD_MATERIA_ACAD, i.NOMBRE, i.PARALELO))
+
+    except:
+        data= gradesMat[1].__getitem__(0).__getitem__(0)
+        sub = Subject(data.COD_MATERIA_ACAD,data.NOMBRE,data.PARALELO)
+        subjects.append(sub)
+
 
     for subject in subjects:
         #Return HORARIOCLASES

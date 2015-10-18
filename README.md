@@ -21,5 +21,10 @@
 	cd wsSpider
 	chmod +x wsHorario.py
 	./wsHorario.py FIRSTNAME LASTNAME
+
+###### - Run wsMateriasDisponibles:
+	cd wsSpider
+	chmod +x wsMateriasDisponibles.py
+	./wsMateriasDisponibles USERNAME
 	
-###### -Actually wsSpider and wsHorario is in Python 2
+###### -Actually wsSpider, wsHorario, wsMateriasDisponibles are in Python 2

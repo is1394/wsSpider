@@ -15,6 +15,15 @@ class Student():
 	def __str_(self):
 		return " " + self.name + " " + self.lastname
 
+class Subject():
+	courses = []
+	def __init__(self,code,name): #subject_code, name , course
+		self.code = code
+		self.name = name
+
+	def setCourses(self,tmp_courses):
+		self.courses = tmp_courses
+
 url='http://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL'
 imp = Import('http://www.w3.org/2001/XMLSchema')
 imp.filter.add('http://tempuri.org/')
@@ -49,11 +58,30 @@ if (usrname.isalpha()):
 	try:
 		for i in Data2.diffgram.NewDataSet.MATERIASDISPONIBLES:
 			#return  nombre_materia, cod_materia_acad
-			subjects.append(i.NOMBRE_MATERIA)
+			s = Subject(i.COD_MATERIA_ACAD,i.NOMBRE_MATERIA)
+			subjects.append(s)
 	except:
 		print("Error mientras bajaba materias\n")
 
-print("Total de materias: " + str(len(subjects)) + "\n")
-for i in subjects:
-	print(i + "\n")
+for s in subjects:
+	Data3 = client.service.wsBuscarMateria(s.code,1)
+	tmp_courses = []
+	try:
+		for i in Data3.diffgram.NewDataSet.MATERIA:
+			tmp_courses.append(i.PARALELO)
+		s.setCourses(tmp_courses)
+	except:
+		tmp = Data3[1].__getitem__(0).__getitem__(0)
+		tmp_courses.append(tmp.PARALELO)
+		s.setCourses(tmp_courses)
+	print s.name
+	print s.courses
+	#print ("\n")
 
+"""
+print("Total de materias: " + str(len(subjects)) + "\n")
+i = 1
+for sub in subjects:
+	print (str(i)+ " " + sub.name)
+	i +=1
+	print (sub.courses) """

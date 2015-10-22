@@ -102,8 +102,8 @@ if (name.isalpha() and lastname.isalpha()):
     for subject in subjects:
         #Return HORARIOCLASES
         data2= client.service.wsHorarioClases(subject.code,subject.course)
-        for i in data2.diffgram.NewDataSet.HORARIOCLASES:
-            try:
+        try:
+            for i in data2.diffgram.NewDataSet.HORARIOCLASES:
                 sub =[]
                 sub.append(i.NOMBRE)
                 sub.append(i.HORAINICIO.lstrip("PT"))
@@ -113,8 +113,17 @@ if (name.isalpha() and lastname.isalpha()):
                 sub.append(i.BLOQUE)
                 subjsTabulate.append(sub)
                 #recorded_subjs.append(Schedule(i.NOMBRE,i.HORAINICIO,i.HORAFIN,i.NOMBREDIA,i.AULA,i.BLOQUE))
-            except:
-                pass
+        except:
+            sub = []
+            sub.append(data2[1].__getitem__(0).__getitem__(0).NOMBRE)
+            sub.append(data2[1].__getitem__(0).__getitem__(0).HORAINICIO.lstrip("PT"))
+            sub.append(data2[1].__getitem__(0).__getitem__(0).HORAFIN.lstrip("PT"))
+            sub.append(data2[1].__getitem__(0).__getitem__(0).NOMBREDIA)
+            sub.append(data2[1].__getitem__(0).__getitem__(0).AULA)
+            sub.append(data2[1].__getitem__(0).__getitem__(0).BLOQUE)
+            subjsTabulate.append(sub)
+
+
 
     print ("\n\n")
     #for sub in recorded_subjs:
